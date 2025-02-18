@@ -9,9 +9,6 @@ public class PlayerController : BaseController
     private Camera camera;
     private GameManager gameManager;
 
-    [SerializeField] public SpriteRenderer ridingRenderer;
-    private bool isRiding;
-
     public void Init(GameManager gameManager)
     {
         this.gameManager = gameManager;
@@ -22,18 +19,6 @@ public class PlayerController : BaseController
     {
 
 
-    }
-
-    protected override void Rotate(Vector2 direction)
-    {
-        float rotz = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bool isLeft = Mathf.Abs(rotz) > 90f;
-
-        characterRenderer.flipX = isLeft;
-        if (isRiding)
-        {
-            ridingRenderer.flipX = isLeft;
-        }
     }
 
     void OnMove(InputValue inputValue)

@@ -9,7 +9,7 @@ public class BaseController : MonoBehaviour
 
     protected Rigidbody2D _rigidbody;
 
-    [SerializeField] protected SpriteRenderer characterRenderer;
+    [SerializeField] private SpriteRenderer characterRenderer;
 
 
     protected Vector2 movementDirection = Vector2.zero;
@@ -18,7 +18,9 @@ public class BaseController : MonoBehaviour
     protected Vector2 lookDirection = Vector2.zero;
     public Vector2 LookDirection { get { return lookDirection; } }
 
-    
+    [SerializeField] private SpriteRenderer ridingRenderer;
+    [SerializeField][Range(0f, 10f)] public float ridingSpeed = 5f;
+    protected bool isRiding;
 
     protected virtual void Awake()
     {
@@ -47,18 +49,29 @@ public class BaseController : MonoBehaviour
     }
     private void Movement(Vector2 direction)
     {
-        direction *= speed;
+        if (isRiding)
+        {
+            direction *= (speed + ridingSpeed);
+        }
+        else
+        {
+            direction *= speed;
+        }
 
         _rigidbody.velocity = direction;
         lookDirection = direction.normalized;
         //animationHandler.Move(direction);
     }
 
-    protected virtual void Rotate(Vector2 direction)
+    private void Rotate(Vector2 direction)
     {
         float rotz = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         bool isLeft = Mathf.Abs(rotz) > 90f;
 
         characterRenderer.flipX = isLeft;
+        if (isRiding)
+        {
+            ridingRenderer.flipX = isLeft;
+        }
     }
 }
