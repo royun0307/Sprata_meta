@@ -22,9 +22,12 @@ public class BaseController : MonoBehaviour
     [SerializeField][Range(0f, 10f)] public float ridingSpeed = 5f;
     protected bool isRiding;
 
+    AnimationHandler animationHandler;
+
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        animationHandler = GetComponent<AnimationHandler>();
     }
 
     protected virtual void Start()
@@ -40,7 +43,7 @@ public class BaseController : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        Movement(movementDirection);
+        Movement(MovementDirection);
     }
 
     protected virtual void HandleAction()
@@ -60,7 +63,7 @@ public class BaseController : MonoBehaviour
 
         _rigidbody.velocity = direction;
         lookDirection = direction.normalized;
-        //animationHandler.Move(direction);
+        animationHandler.Move(direction);
     }
 
     private void Rotate(Vector2 direction)
