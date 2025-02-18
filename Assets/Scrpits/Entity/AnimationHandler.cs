@@ -6,7 +6,6 @@ public class AnimationHandler : MonoBehaviour
 {
     private static readonly int IsMoving = Animator.StringToHash("IsMove");
 
-
     protected Animator playerAnimator;
     protected Animator ridingAnimator;
 
@@ -21,9 +20,5 @@ public class AnimationHandler : MonoBehaviour
         bool flag = obj.magnitude > .5f;
         playerAnimator.SetBool(IsMoving, flag);
         ridingAnimator.SetBool(IsMoving, flag);
-    }
-
-    public void Riding() {
-    
     }
 }
