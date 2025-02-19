@@ -11,8 +11,8 @@ public class CameraController : MonoBehaviour
    
     private void Awake()
     {
-        playerTransform = FindAnyObjectByType<PlayerController>().GetComponent<Transform>();
-    }
+            playerTransform = FindAnyObjectByType<PlayerController>().GetComponent<Transform>();
+        }
 
     private void FixedUpdate()
     {
