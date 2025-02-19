@@ -15,10 +15,13 @@ public class AnimationHandler : MonoBehaviour
         ridingAnimator = transform.GetChild(1).GetComponent<Animator>();
     }
 
-    public void Move(Vector2 obj)
+    public void Move(Vector2 obj, bool isRide)
     {
         bool flag = obj.magnitude > .5f;
         playerAnimator.SetBool(IsMoving, flag);
-        ridingAnimator.SetBool(IsMoving, flag);
+        if (isRide)
+        {
+            ridingAnimator.SetBool(IsMoving, flag);
+        }
     }
 }

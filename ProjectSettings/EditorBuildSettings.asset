@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LobbyScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Mini_Stack.unity
+    guid: b2bfd798a73891949b2ca6cd55770a48
   m_configObjects: {}

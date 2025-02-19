@@ -63,7 +63,7 @@ public class BaseController : MonoBehaviour
 
         _rigidbody.velocity = direction;
         lookDirection = direction.normalized;
-        animationHandler.Move(direction);
+        animationHandler.Move(direction, isRiding);
     }
 
     private void Rotate(Vector2 direction)
