@@ -37,7 +37,6 @@ public class BaseController : MonoBehaviour
 
     protected virtual void Update()
     {
-        HandleAction();
         Rotate(lookDirection);
     }
 
@@ -46,10 +45,6 @@ public class BaseController : MonoBehaviour
         Movement(MovementDirection);
     }
 
-    protected virtual void HandleAction()
-    {
-
-    }
     private void Movement(Vector2 direction)
     {
         if (isRiding)

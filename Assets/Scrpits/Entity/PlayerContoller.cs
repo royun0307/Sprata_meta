@@ -8,17 +8,9 @@ public class PlayerController : BaseController
 {
     private GameManager gameManager;
 
-
-
     public void Init(GameManager gameManager)
     {
         this.gameManager = gameManager;
-    }
-
-    protected override void HandleAction()
-    {
-
-
     }
 
     void OnMove(InputValue inputValue)
