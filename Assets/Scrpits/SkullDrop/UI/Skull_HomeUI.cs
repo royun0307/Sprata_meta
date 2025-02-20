@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TheStack_HomeUI : TheStack_BaseUI
+public class Skull_HomeUI : Skull_BaseUI
 {
     Button startButton;
     Button explainButton;
@@ -13,12 +13,12 @@ public class TheStack_HomeUI : TheStack_BaseUI
 
     bool isExplain = false;
 
-    protected override TheStack_UIState GetUIState()
+    protected override Skull_UIState GetUIState()
     {
-        return TheStack_UIState.Home;
+        return Skull_UIState.Home;
     }
 
-    public override void Init(TheStack_UIManager uiManager)
+    public override void Init(Skull_UIManager uiManager)
     {
         base.Init(uiManager);
 
@@ -45,6 +45,6 @@ public class TheStack_HomeUI : TheStack_BaseUI
     void OnClickExplainButton()
     {
         isExplain = !isExplain;
-        uiManager.OnClickExplain(isExplain);       
+        uiManager.OnClickExplain(isExplain);
     }
 }

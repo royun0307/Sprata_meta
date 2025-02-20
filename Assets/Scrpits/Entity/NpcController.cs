@@ -6,7 +6,7 @@ public class NpcController : BaseController
 {
     public GameObject player;
 
-    bool isPlayer = false;//플레이어가 접근했는지 여부
+    protected bool isPlayer = false;//플레이어가 접근했는지 여부
 
     protected override void Awake()
     {
@@ -27,7 +27,7 @@ public class NpcController : BaseController
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag.Equals("Player"))//플레이어가 접근하면
         {
@@ -35,7 +35,7 @@ public class NpcController : BaseController
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    protected void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.tag.Equals("Player"))//플레이어가 멀어지면
         {

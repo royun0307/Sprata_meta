@@ -11,7 +11,6 @@ public class LeaderBoradNpcController : NpcController
     public string gameName;//게임이름
     public string key;//게임의 최고점수 저장 키
 
-    bool isPlayer = false;//플레이어가 접근했는지 여부
     bool isLeaderBoard = false;//LeaderBoardUI가 On되어있는지 여부
 
     private void Start()

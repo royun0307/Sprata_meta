@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]//미니게임 목록
     public Tuple<string, string>[] game = {
-        new Tuple<string, string>("The Stack", "Stack_BestScore"), new Tuple<string, string>("Mini", "ads")};
+        new Tuple<string, string>("The Stack", "Stack_BestScore"), new Tuple<string, string>("Avoid Skull", "Skull_BestScore")};
 
     private void Awake()
     {

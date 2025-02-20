@@ -1,35 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TheStack_HomeUI : TheStack_BaseUI
+public class Skull_ScoreUI : Skull_BaseUI
 {
+    TextMeshProUGUI scoreText;
+    TextMeshProUGUI bestScoreText;
+
     Button startButton;
-    Button explainButton;
     Button exitButton;
 
-    public Image explain;
-
-    bool isExplain = false;
-
-    protected override TheStack_UIState GetUIState()
+    protected override Skull_UIState GetUIState()
     {
-        return TheStack_UIState.Home;
+        return Skull_UIState.Score;
     }
 
-    public override void Init(TheStack_UIManager uiManager)
+    public override void Init(Skull_UIManager uiManager)
     {
         base.Init(uiManager);
 
+        scoreText = transform.Find("LevelText").GetComponent<TextMeshProUGUI>();
+        bestScoreText = transform.Find("BestLevelText").GetComponent<TextMeshProUGUI>();
         startButton = transform.Find("StartButton").GetComponent<Button>();
-        explainButton = transform.Find("ExplainButton").GetComponent<Button>();
         exitButton = transform.Find("ExitButton").GetComponent<Button>();
-        explain = transform.Find("Explain").GetComponent<Image>();
 
         startButton.onClick.AddListener(OnClickStartButton);
-        explainButton.onClick.AddListener(OnClickExplainButton);
         exitButton.onClick.AddListener(OnClickExitButton);
+    }
+
+    public void SetUI(int score, int bestLevel)
+    {
+        scoreText.text = score.ToString();
+        bestScoreText.text = bestLevel.ToString();
     }
 
     void OnClickStartButton()
@@ -40,11 +44,5 @@ public class TheStack_HomeUI : TheStack_BaseUI
     void OnClickExitButton()
     {
         uiManager.OnClickExit();
-    }
-
-    void OnClickExplainButton()
-    {
-        isExplain = !isExplain;
-        uiManager.OnClickExplain(isExplain);       
     }
 }
