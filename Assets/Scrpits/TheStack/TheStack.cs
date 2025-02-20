@@ -74,7 +74,7 @@ public class TheStack : MonoBehaviour
                 UpdateScore();
                 isGameOver = true;
                 GameOverEffect();
-                UIManager.Instance.SetScoreUI();
+                TheStack_UIManager.Instance.SetScoreUI();
             }
         }
         MoveBlock();
@@ -115,7 +115,7 @@ public class TheStack : MonoBehaviour
 
         isLeft = !isLeft;
 
-        UIManager.Instance.UpdateScore();
+        TheStack_UIManager.Instance.UpdateScore();
         return true;
     }
 

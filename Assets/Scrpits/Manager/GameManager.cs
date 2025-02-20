@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -9,6 +10,10 @@ public class GameManager : MonoBehaviour
     public PlayerController player { get; private set; }
 
     public GameObject playerSprite;
+
+    [SerializeField]
+    public Tuple<string, string>[] game = {
+        new Tuple<string, string>("The Stack", "Stack_BestScore"), new Tuple<string, string>("Mini", "ads")};
 
     private void Awake()
     {

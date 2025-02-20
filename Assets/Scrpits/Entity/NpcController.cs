@@ -15,7 +15,7 @@ public class NpcController : MonoBehaviour
         npcSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
-    public void Update()
+    protected virtual void Update()
     {
         Rotate(lookDirection);
     }

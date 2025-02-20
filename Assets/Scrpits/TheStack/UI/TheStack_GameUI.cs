@@ -5,17 +5,17 @@ using TMPro;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class GameUI : BaseUI
+public class TheStack_GameUI : TheStack_BaseUI
 {
     TextMeshProUGUI scoreText;
     TextMeshProUGUI comboText;
 
-    protected override UIState GetUIState()
+    protected override TheStack_UIState GetUIState()
     {
-        return UIState.Game;
+        return TheStack_UIState.Game;
     }
 
-    public override void Init(UIManager uiManager)
+    public override void Init(TheStack_UIManager uiManager)
     {
         base.Init(uiManager);
 
