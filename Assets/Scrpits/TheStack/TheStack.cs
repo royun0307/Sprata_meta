@@ -35,10 +35,10 @@ public class TheStack : MonoBehaviour
     int bestScore = 0;
     public int BestScore { get { return bestScore; } }
 
-    public const string BestScoreKey = "Stack_BestScore";
+    public const string BestScoreKey = "Stack_BestScore";//점수 저장 키
 
-    private bool isGameOver = true;
-    // Start is called before the first frame update
+    private bool isGameOver = true;//게임중인지 여부
+
     void Start()
     {
         if (originBlock == null)
@@ -47,28 +47,27 @@ public class TheStack : MonoBehaviour
             return;
         }
 
-        bestScore = PlayerPrefs.GetInt(BestScoreKey, 0);
+        bestScore = PlayerPrefs.GetInt(BestScoreKey, 0);//저장
 
         prevColor = GetRandomColor();
         nextColor = GetRandomColor();
 
         preBlockPosition = Vector3.down;
 
-        Spawn_Block();
-        Spawn_Block();
+        Spawn_Block();//블럭 생성
+        Spawn_Block();//블럭 생성
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetMouseButtonDown(0) && !isGameOver)
         {
-            if (PlaceBlock())
+            if (PlaceBlock())//게임중
             {
                 Spawn_Block();
             }
-            else
+            else//게임 오버
             {
                 Debug.Log("Game Over");
                 UpdateScore();
@@ -77,11 +76,11 @@ public class TheStack : MonoBehaviour
                 TheStack_UIManager.Instance.SetScoreUI();
             }
         }
-        MoveBlock();
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, StackMovingSpeed * Time.deltaTime);
+        MoveBlock();//블럭 움직임
+        transform.position = Vector3.Lerp(transform.position, desiredPosition, StackMovingSpeed * Time.deltaTime);//스택을 아래로 이동
     }
 
-    bool Spawn_Block()
+    bool Spawn_Block()//블럭 생성
     {
         if (lastBlock != null)
         {
@@ -98,7 +97,7 @@ public class TheStack : MonoBehaviour
             return false;
         }
 
-        ColorChange(newBlock);
+        ColorChange(newBlock);//색 변경
 
         newTrans = newBlock.transform;
         newTrans.parent = this.transform;
@@ -113,13 +112,13 @@ public class TheStack : MonoBehaviour
 
         lastBlock = newTrans;
 
-        isLeft = !isLeft;
+        isLeft = !isLeft;//방향 변경
 
         TheStack_UIManager.Instance.UpdateScore();
         return true;
     }
 
-    Color GetRandomColor()
+    Color GetRandomColor()//무작위 색상
     {
         float r = Random.Range(100f, 250f) / 255f;
         float g = Random.Range(100f, 250f) / 255f;
@@ -128,7 +127,7 @@ public class TheStack : MonoBehaviour
         return new Color(r, g, b);
     }
 
-    void ColorChange(GameObject go)
+    void ColorChange(GameObject go)//색 변경
     {
         Color applyColor = Color.Lerp(prevColor, nextColor, (stackCount % 11) / 10f);
 
@@ -151,7 +150,7 @@ public class TheStack : MonoBehaviour
         }
     }
 
-    void MoveBlock()
+    void MoveBlock()//블럭 이동
     {
         blockTransition += Time.deltaTime * BlockMovingSpeed;
 
@@ -167,7 +166,7 @@ public class TheStack : MonoBehaviour
         }
     }
 
-    bool PlaceBlock()
+    bool PlaceBlock()//블럭 쌓기
     {
         Vector3 lastPosition = lastBlock.localPosition;
 
@@ -201,7 +200,6 @@ public class TheStack : MonoBehaviour
                     ),
                     new Vector3(deltaX, 1, 0)
                 );
-
             comboCount = 0;
         }
         else
@@ -209,13 +207,10 @@ public class TheStack : MonoBehaviour
             ComboCheck();
             lastBlock.localPosition = preBlockPosition + Vector3.up;
         }
-
-
-
         return true;
     }
 
-    void CreateRubble(Vector3 pos, Vector3 scale)
+    void CreateRubble(Vector3 pos, Vector3 scale)//잔해 생성
     {
         GameObject go = Instantiate(lastBlock.gameObject);
         go.transform.parent = this.transform;
@@ -240,7 +235,7 @@ public class TheStack : MonoBehaviour
         }
     }
 
-    void UpdateScore()
+    void UpdateScore()//점수 갱신
     {
         if (bestScore < stackCount)
         {
@@ -251,7 +246,7 @@ public class TheStack : MonoBehaviour
         }
     }
 
-    void GameOverEffect()
+    void GameOverEffect()//게임이 끝날시 발동되는 이펙트
     {
         int childCount = this.transform.childCount;
 
@@ -268,7 +263,7 @@ public class TheStack : MonoBehaviour
         }
     }
 
-    public void Restart()
+    public void Restart()//재시작
     {
         int childCount = this.transform.childCount;
 

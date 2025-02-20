@@ -12,7 +12,7 @@ public enum TheStack_UIState
 }
 public class TheStack_UIManager : MonoBehaviour
 {
-    static TheStack_UIManager instance;
+    static TheStack_UIManager instance; //ΩÃ±€≈Ê
     public static TheStack_UIManager Instance { get { return instance; } }
 
     TheStack_UIState currnetState = TheStack_UIState.Home;
@@ -40,7 +40,7 @@ public class TheStack_UIManager : MonoBehaviour
         ChangeState(TheStack_UIState.Home);
     }
 
-    public void ChangeState(TheStack_UIState state)
+    public void ChangeState(TheStack_UIState state)//state ∫Ø∞Ê
     {
         currnetState = state;
         homeUI?.SetActive(currnetState);

@@ -6,45 +6,38 @@ using UnityEngine;
 
 public class LeaderBoradNpcController : NpcController
 {
-    int index = 0;
-    int score = 0;
-    public string gameName;
-    public string key;
+    int index = 0;//인덱스
+    int score = 0;//최고 점수
+    public string gameName;//게임이름
+    public string key;//게임의 최고점수 저장 키
 
-    bool isPlayer = false;
-    bool isLeaderBoard = false;
+    bool isPlayer = false;//플레이어가 접근했는지 여부
+    bool isLeaderBoard = false;//LeaderBoardUI가 On되어있는지 여부
 
     private void Start()
     {
-        SetValue();
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag.Equals("Player"))
-        {
-            isPlayer = true;
-        }
+        SetValue();//값 설정
     }
 
     protected override void Update()
     {
         base.Update();
-        if (isPlayer)
+        if (isPlayer)//플레이어가 접근해있고
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                if (!isLeaderBoard)
+                if (!isLeaderBoard)//LeaderBoardUI 상태가 아니면
                 {
                     UIManager.Instance.SetLeaderBoardUI(gameName, score);
                 }
-                else
+                else//LeaderBoardUI상태면
                 {
                     UIManager.Instance.SetHomeUI();
                 }
                 isLeaderBoard = !isLeaderBoard;
             }
 
-            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))//인덱스 감소
             {
                 if (index == 0)
                 {
@@ -57,7 +50,7 @@ public class LeaderBoradNpcController : NpcController
                 SetValue();
                 UIManager.Instance.SetLeaderBoardUI(gameName, score);
             }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            else if (Input.GetKeyDown(KeyCode.RightArrow))//인덱스 증가
             {
                 index++;
                 if(index == GameManager.Instance.game.Length)
@@ -70,21 +63,12 @@ public class LeaderBoradNpcController : NpcController
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag.Equals("Player"))
-        {
-            UIManager.Instance.SetHomeUI();
-            isPlayer = false;
-        }
-    }
-
     private void SetValue()
     {
         gameName = GameManager.Instance.game[index].Item1;
         key = GameManager.Instance.game[index].Item2;
 
-        if (!PlayerPrefs.HasKey(key))
+        if (!PlayerPrefs.HasKey(key))//저장된값이 없으면
         {
             score = 0;
         }

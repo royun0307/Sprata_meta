@@ -5,24 +5,22 @@ using UnityEngine;
 
 public class BaseController : MonoBehaviour
 {
-    [Range(0f, 10f)][SerializeField] private float speed = 5f;
+    [Range(0f, 10f)][SerializeField] protected float speed = 5f; //이동속도
 
     protected Rigidbody2D _rigidbody;
 
     [SerializeField] public SpriteRenderer characterRenderer;
 
 
-    protected Vector2 movementDirection = Vector2.zero;
+    protected Vector2 movementDirection = Vector2.zero; //움직이는 방향
     public Vector2 MovementDirection { get { return movementDirection; } }
 
-    protected Vector2 lookDirection = Vector2.zero;
+    protected Vector2 lookDirection = Vector2.zero;//보는 방향
     public Vector2 LookDirection { get { return lookDirection; } }
 
-    [SerializeField] private SpriteRenderer ridingRenderer;
-    [SerializeField][Range(0f, 10f)] public float ridingSpeed = 5f;
-    protected bool isRiding;
+    protected AnimationHandler animationHandler;
 
-    AnimationHandler animationHandler;
+    public bool isLeft = false;
 
     protected virtual void Awake()
     {
@@ -30,46 +28,28 @@ public class BaseController : MonoBehaviour
         animationHandler = GetComponent<AnimationHandler>();
     }
 
-    protected virtual void Start()
-    {
-
-    }
-
     protected virtual void Update()
     {
-        Rotate(lookDirection);
+        Rotate(lookDirection);//회전
     }
 
     protected virtual void FixedUpdate()
     {
-        Movement(MovementDirection);
+        Movement(MovementDirection);//움직임
     }
 
-    private void Movement(Vector2 direction)
+    protected virtual void Movement(Vector2 direction)//움직임
     {
-        if (isRiding)
-        {
-            direction *= (speed + ridingSpeed);
-        }
-        else
-        {
-            direction *= speed;
-        }
-
         _rigidbody.velocity = direction;
         lookDirection = direction.normalized;
-        animationHandler.Move(direction, isRiding);
+        animationHandler.Move(direction);//애니메이션 실행
     }
 
-    private void Rotate(Vector2 direction)
+    protected virtual void Rotate(Vector2 direction)//회전
     {
         float rotz = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bool isLeft = Mathf.Abs(rotz) > 90f;
+        isLeft = Mathf.Abs(rotz) > 90f;
 
-        characterRenderer.flipX = isLeft;
-        if (isRiding)
-        {
-            ridingRenderer.flipX = isLeft;
-        }
+        characterRenderer.flipX = isLeft;//좌우반전
     }
 }

@@ -2,37 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NpcController : MonoBehaviour
+public class NpcController : BaseController
 {
-    private SpriteRenderer npcSpriteRenderer;
+    public GameObject player;
 
-    protected Vector2 lookDirection = Vector2.zero;
-    public Vector2 LookDirection { get { return lookDirection; } }
+    bool isPlayer = false;//플레이어가 접근했는지 여부
 
-
-    public void Awake()
+    protected override void Awake()
     {
-        npcSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        characterRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
-    protected virtual void Update()
+    protected override void FixedUpdate()
     {
-        Rotate(lookDirection);
+        
     }
 
-    protected virtual void OnTriggerStay2D(Collider2D collision)
+    protected override void Update()
     {
-        if (collision.tag.Equals("Player"))
+        base.Update();
+        if (isPlayer)//보는 방향 계싼
         {
-            lookDirection = collision.gameObject.transform.position - transform.position;
+            lookDirection = player.gameObject.transform.position - transform.position;
         }
     }
 
-    private void Rotate(Vector2 direction)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        float rotz = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bool isLeft = Mathf.Abs(rotz) > 90f;
+        if (collision.tag.Equals("Player"))//플레이어가 접근하면
+        {
+            isPlayer = true;
+        }
+    }
 
-        npcSpriteRenderer.flipX = isLeft;
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag.Equals("Player"))//플레이어가 멀어지면
+        {
+            UIManager.Instance.SetHomeUI();
+            isPlayer = false;
+        }
     }
 }

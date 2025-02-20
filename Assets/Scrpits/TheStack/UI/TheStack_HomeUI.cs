@@ -25,7 +25,6 @@ public class TheStack_HomeUI : TheStack_BaseUI
         startButton = transform.Find("StartButton").GetComponent<Button>();
         explainButton = transform.Find("ExplainButton").GetComponent<Button>();
         exitButton = transform.Find("ExitButton").GetComponent<Button>();
-        explain = transform.Find("Explain").GetComponent<Image>();
 
         startButton.onClick.AddListener(OnClickStartButton);
         explainButton.onClick.AddListener(OnClickExplainButton);
@@ -45,7 +44,6 @@ public class TheStack_HomeUI : TheStack_BaseUI
     void OnClickExplainButton()
     {
         isExplain = !isExplain;
-        uiManager.OnClickExplain(isExplain);
-        
+        uiManager.OnClickExplain(isExplain);       
     }
 }

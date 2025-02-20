@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class MoveScene : MonoBehaviour
 {
-    private string minigameName;
+    private string minigameName;//미니게임이 있는 씬이름
 
     public void Awake()
     {
@@ -17,7 +17,7 @@ public class MoveScene : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.F))
         {
-            SceneManager.LoadScene(minigameName);
+            SceneManager.LoadScene(minigameName);//씬이동
         }
     }
 }
