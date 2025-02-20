@@ -8,12 +8,21 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public PlayerController player { get; private set; }
 
+    public GameObject playerSprite;
+
     private void Awake()
     {
-        Instance = this;
+        
+        if (Instance == null)
+        {
+            Instance = this;
 
-        player = FindObjectOfType<PlayerController>();
-        player.Init(this);
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     private void Start()
     {

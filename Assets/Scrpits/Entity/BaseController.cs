@@ -9,7 +9,7 @@ public class BaseController : MonoBehaviour
 
     protected Rigidbody2D _rigidbody;
 
-    [SerializeField] private SpriteRenderer characterRenderer;
+    [SerializeField] public SpriteRenderer characterRenderer;
 
 
     protected Vector2 movementDirection = Vector2.zero;

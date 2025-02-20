@@ -20,7 +20,7 @@ public class NpcController : MonoBehaviour
         Rotate(lookDirection);
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    protected virtual void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.tag.Equals("Player"))
         {

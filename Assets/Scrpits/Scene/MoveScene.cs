@@ -15,7 +15,7 @@ public class MoveScene : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKey(KeyCode.F))
         {
             SceneManager.LoadScene(minigameName);
         }

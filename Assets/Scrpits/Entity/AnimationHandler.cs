@@ -6,13 +6,19 @@ public class AnimationHandler : MonoBehaviour
 {
     private static readonly int IsMoving = Animator.StringToHash("IsMove");
 
-    protected Animator playerAnimator;
-    protected Animator ridingAnimator;
+    public Animator playerAnimator;
+    public Animator ridingAnimator;
 
-    protected virtual void Awake()
+    private void Awake()
     {
-        playerAnimator = transform.GetChild(0).GetComponent<Animator>();
-        ridingAnimator = transform.GetChild(1).GetComponent<Animator>();
+        
+        ridingAnimator = transform.GetChild(0).GetComponent<Animator>();
+        playerAnimator = transform.GetChild(1).GetComponent<Animator>();
+    }
+
+    public void SetPlayerAnimator(GameObject go)
+    {
+        playerAnimator = go.GetComponent<Animator>();
     }
 
     public void Move(Vector2 obj, bool isRide)
